@@ -2,7 +2,7 @@ import { useState } from "react";
 import Timer from "./Timer";
 import "./App.css";
 
-function LetterSounds() {
+function LetterSounds({ setCurrentPage }) {
   function letterConverter() {
     const asciiStart = 65;
     const letterIndex = Math.floor(Math.random() * 58);
@@ -55,6 +55,12 @@ function LetterSounds() {
         {gameOver ? "Time's Up!" : finalLetter}
       </div>
       <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
+
+      {gameOver && (
+        <button onClick={() => setCurrentPage("home")}>
+          Back to Main Menu
+        </button>
+      )}
     </div>
   );
 }
