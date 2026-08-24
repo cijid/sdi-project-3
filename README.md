@@ -1,5 +1,3 @@
-# Project 3
-
 # Project Title - Mouth Sounds
 
 ## Overview
@@ -10,6 +8,6 @@ The Cantonese portion will focus on phoneme recognition and pronunciation using 
 
 ## Table of Contents
 
-Description
-Installation
-Usage
+Description <br />
+Installation<br />
+Usage<br />
