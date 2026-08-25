@@ -24,6 +24,14 @@ app.get("/users", (req, res) => {
     });
 });
 
+app.get("/children", (req, res) => {
+  knex("children")
+    .select("*")
+    .then((user) => {
+      res.status(200).json(user);
+    });
+});
+
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   knex("users")
@@ -43,6 +51,16 @@ app.get("/sightwords", (req, res) => {
       res.json(data);
     });
 });
+
+app.get("/lettersounds", (req, res) => {
+  knex("letter_sounds")
+    .select("*")
+    .then((data) => {
+      res.status(200).json(data);
+    });
+});
+
+// app.post("/")
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -2,6 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+
 exports.up = function (knex) {
   return knex.schema.createTable("letter_sounds", (table) => {
     table.increments("id").primary();

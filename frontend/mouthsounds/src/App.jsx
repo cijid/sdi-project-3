@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SplashPage from "./SplashPage";
 import SightWords from "./SightWords";
 import LetterSounds from "./LetterSounds";
@@ -10,8 +10,19 @@ import SightWordsSplashPage from "./SightWordsSplashPage";
 import "./App.css";
 
 function App() {
+  const [selectedChild, setSelectedChild] = useState(null);
   const [currentPage, setCurrentPage] = useState("home");
   const [sightWordGrade, setSightWordGrade] = useState(-1);
+  const [children, setChildren] = useState([]);
+
+  //Fetch the children for they are on the loose.
+  useEffect(() => {
+    fetch("http://localhost:8081/children")
+      .then((res) => res.json())
+      .then((data) => {
+        setChildren(data);
+      });
+  }, []);
 
   if (currentPage === "lettersSplash") {
     return <LetterSoundsSplashPage setCurrentPage={setCurrentPage} />;
@@ -49,7 +60,14 @@ function App() {
     );
   }
 
-  return <SplashPage setCurrentPage={setCurrentPage} />;
+  return (
+    <SplashPage
+      setCurrentPage={setCurrentPage}
+      children={children}
+      selectedChild={selectedChild}
+      setSelectedChild={setSelectedChild}
+    />
+  );
 }
 
 export default App;
