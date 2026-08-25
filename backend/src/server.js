@@ -33,11 +33,14 @@ app.get("/users/:id", (req, res) => {
     });
 });
 
-app.get("/sightwords/", (req, res) => {
+app.get("/sightwords", (req, res) => {
+  const { gradelevel } = req.query;
+
   knex("sightwords")
-    .select("word")
-    .then((word) => {
-      res.status(200).json(word);
+    .select("*")
+    .where("gradelevel", gradelevel)
+    .then((data) => {
+      res.json(data);
     });
 });
 
