@@ -32,11 +32,9 @@ function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
         <option value="4">Nouns</option>
       </select>
 
-      <button onClick={() => setCurrentPage(handleChildMode)}>
-        Sight Words - Child Mode
-      </button>
+      <button onClick={() => handleChildMode}>Sight Words - Child Mode</button>
 
-      <button onClick={() => setCurrentPage(handleParentMode)}>
+      <button onClick={handleParentMode}>
         Sight Words - Parent Participation Mode
       </button>
 

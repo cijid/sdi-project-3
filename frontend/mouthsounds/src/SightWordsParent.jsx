@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 
-function SightWords({ setCurrentPage }) {
+function SightWordsParent({ setCurrentPage, gradeLevel }) {
   const [wordList, setWordList] = useState([]);
   const [word, setWord] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8081/sightwords")
+    fetch(`http://localhost:8081/sightwords?gradelevel=${gradeLevel}`)
       .then((res) => res.json())
       .then((data) => {
         setWordList(data);
@@ -18,7 +18,7 @@ function SightWords({ setCurrentPage }) {
           setWord(data[randomIndex]);
         }
       });
-  }, []);
+  }, [gradeLevel]);
 
   function handleWordClick() {
     // Don't allow more clicks after 60 seconds
@@ -62,4 +62,4 @@ function SightWords({ setCurrentPage }) {
   );
 }
 
-export default SightWords;
+export default SightWordsParent;
