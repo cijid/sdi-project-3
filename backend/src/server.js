@@ -32,6 +32,14 @@ app.get("/children", (req, res) => {
     });
 });
 
+app.get("/guardians", (req, res) => {
+  knex("guardians")
+    .select("*")
+    .then((user) => {
+      res.status(200).json(user);
+    });
+});
+
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   knex("users")
@@ -122,6 +130,49 @@ app.post("/guardians", async (req, res) => {
     console.error(err);
     res.status(500).json({
       error: "Could not create guardian",
+    });
+  }
+});
+
+app.post("/child-guardians", async (req, res) => {
+  try {
+    const { child_id, guardian_id, relationship } = req.body;
+
+    const [link] = await knex("child_guardians")
+      .insert({
+        child_id,
+        guardian_id,
+        relationship,
+      })
+      .returning("*");
+
+    res.status(201).json(link);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "Could not associate guardian with child",
+    });
+  }
+});
+
+app.get("/children/:id/guardians", async (req, res) => {
+  try {
+    const guardians = await knex("child_guardians")
+      .join("guardians", "child_guardians.guardian_id", "guardians.id")
+      .select(
+        "guardians.id",
+        "guardians.first_name",
+        "guardians.last_name",
+        "guardians.email",
+        "child_guardians.relationship",
+      )
+      .where("child_guardians.child_id", req.params.id);
+
+    res.status(200).json(guardians);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "Could not retrieve guardians for child",
     });
   }
 });

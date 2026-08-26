@@ -49,6 +49,10 @@ function SplashPage({
       <button onClick={() => setCurrentPage("createGuardian")}>
         Create a Guardian
       </button>
+
+      <button onClick={() => setCurrentPage("linkGuardianChild")}>
+        Link Guardian Child
+      </button>
     </div>
   );
 }

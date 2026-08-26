@@ -8,6 +8,7 @@ import SightWordsParent from "./SightWordsParent";
 import SightWordsSplashPage from "./SightWordsSplashPage";
 import ConceiveChild from "./ConceiveChild";
 import CreateGuardian from "./CreateGuardian";
+import LinkGuardianChild from "./LinkGuardianChild";
 
 import "./App.css";
 
@@ -32,6 +33,10 @@ function App() {
 
   if (currentPage === "createGuardian") {
     return <CreateGuardian setCurrentPage={setCurrentPage} />;
+  }
+
+  if (currentPage === "linkGuardianChild") {
+    return <LinkGuardianChild setCurrentPage={setCurrentPage} />;
   }
 
   if (currentPage === "lettersSplash") {
