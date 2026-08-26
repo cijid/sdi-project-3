@@ -41,6 +41,14 @@ function SplashPage({
       >
         Sight Words
       </button>
+
+      <button onClick={() => setCurrentPage("createChild")}>
+        Conceive a Child
+      </button>
+
+      <button onClick={() => setCurrentPage("createGuardian")}>
+        Create a Guardian
+      </button>
     </div>
   );
 }

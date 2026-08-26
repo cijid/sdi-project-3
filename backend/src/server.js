@@ -60,7 +60,71 @@ app.get("/lettersounds", (req, res) => {
     });
 });
 
-// app.post("/")
+app.post("/practice-sessions", async (req, res) => {
+  try {
+    const [session] = await knex("practice_sessions")
+      .insert(req.body)
+      .returning("*");
+
+    res.status(201).json(session);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not create practice session" });
+  }
+});
+
+app.post("/practice-attempts", async (req, res) => {
+  try {
+    const [attempt] = await knex("practice_attempts")
+      .insert(req.body)
+      .returning("*");
+
+    res.status(201).json(attempt);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not save practice attempt" });
+  }
+});
+
+app.patch("/practice-sessions/:id", async (req, res) => {
+  try {
+    const [session] = await knex("practice_sessions")
+      .where("id", req.params.id)
+      .update(req.body)
+      .returning("*");
+
+    res.status(200).json(session);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not update practice session" });
+  }
+});
+
+app.post("/children", async (req, res) => {
+  try {
+    const [child] = await knex("children").insert(req.body).returning("*");
+
+    res.status(201).json(child);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "Could not create child",
+    });
+  }
+});
+
+app.post("/guardians", async (req, res) => {
+  try {
+    const [guardian] = await knex("guardians").insert(req.body).returning("*");
+
+    res.status(201).json(guardian);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "Could not create guardian",
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -6,6 +6,8 @@ import LetterSoundsParent from "./LetterSoundsParent";
 import LetterSoundsSplashPage from "./LetterSoundsSplashPage";
 import SightWordsParent from "./SightWordsParent";
 import SightWordsSplashPage from "./SightWordsSplashPage";
+import ConceiveChild from "./ConceiveChild";
+import CreateGuardian from "./CreateGuardian";
 
 import "./App.css";
 
@@ -24,6 +26,14 @@ function App() {
       });
   }, []);
 
+  if (currentPage === "createChild") {
+    return <ConceiveChild setCurrentPage={setCurrentPage} />;
+  }
+
+  if (currentPage === "createGuardian") {
+    return <CreateGuardian setCurrentPage={setCurrentPage} />;
+  }
+
   if (currentPage === "lettersSplash") {
     return <LetterSoundsSplashPage setCurrentPage={setCurrentPage} />;
   }
@@ -33,7 +43,12 @@ function App() {
   }
 
   if (currentPage === "lettersparent") {
-    return <LetterSoundsParent setCurrentPage={setCurrentPage} />;
+    return (
+      <LetterSoundsParent
+        selectedChild={selectedChild}
+        setCurrentPage={setCurrentPage}
+      />
+    );
   }
 
   if (currentPage === "sightSplash") {
@@ -56,6 +71,7 @@ function App() {
       <SightWordsParent
         setCurrentPage={setCurrentPage}
         gradeLevel={sightWordGrade}
+        selectedChild={selectedChild}
       />
     );
   }
