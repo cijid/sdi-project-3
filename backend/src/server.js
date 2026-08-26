@@ -177,6 +177,34 @@ app.get("/children/:id/guardians", async (req, res) => {
   }
 });
 
+app.get("/children/:id/results", async (req, res) => {
+  try {
+    const results = await knex("children")
+      .join("practice_sessions", "children.id", "practice_sessions.child_id")
+      .select(
+        "children.id as child_id",
+        "children.first_name",
+        "children.last_name",
+        "practice_sessions.id as session_id",
+        "practice_sessions.activity_type",
+        "practice_sessions.mode",
+        "practice_sessions.gradelevel",
+        "practice_sessions.score",
+        "practice_sessions.started_at",
+        "practice_sessions.ended_at",
+      )
+      .where("children.id", req.params.id)
+      .orderBy("practice_sessions.started_at", "asc");
+
+    res.status(200).json(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "Could not retrieve results for child",
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

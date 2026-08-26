@@ -9,6 +9,7 @@ import SightWordsSplashPage from "./SightWordsSplashPage";
 import ConceiveChild from "./ConceiveChild";
 import CreateGuardian from "./CreateGuardian";
 import LinkGuardianChild from "./LinkGuardianChild";
+import ChildResults from "./ChildResults";
 
 import "./App.css";
 
@@ -61,6 +62,15 @@ function App() {
       <SightWordsSplashPage
         setCurrentPage={setCurrentPage}
         setSightWordGrade={setSightWordGrade}
+      />
+    );
+  }
+
+  if (currentPage === "childresults") {
+    return (
+      <ChildResults
+        selectedChild={selectedChild}
+        setCurrentPage={setCurrentPage}
       />
     );
   }

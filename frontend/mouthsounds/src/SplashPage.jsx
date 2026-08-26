@@ -53,6 +53,9 @@ function SplashPage({
       <button onClick={() => setCurrentPage("linkGuardianChild")}>
         Link Guardian Child
       </button>
+      <button onClick={() => setCurrentPage("childresults")}>
+        View Selected Child's Progress
+      </button>
     </div>
   );
 }
