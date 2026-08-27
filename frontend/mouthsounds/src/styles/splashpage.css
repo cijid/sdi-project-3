@@ -1,4 +1,6 @@
-.splashPage {
+@import "tailwindcss";
+
+/* .splashPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,4 +84,4 @@
 }
 .guardianActionSelector button:hover {
   background-color: #f0f7ff;
-}
+} */

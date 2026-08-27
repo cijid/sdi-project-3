@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
-import "./App.css";
+import "./styles/gamestyleparent.css";
 
 function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
   const [wordList, setWordList] = useState([]);
@@ -201,12 +201,20 @@ function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
       </div>
 
       {!gameOver && (
-        <div>
-          <button onClick={handlePrevious} disabled={currentIndex <= 0}>
-            Previous
-          </button>
+        <div className="gameNavigationRow">
+          <div>
+            <button
+              className="navButton prevButton"
+              onClick={handlePrevious}
+              disabled={currentIndex <= 0}
+            >
+              Previous
+            </button>
 
-          <button onClick={handleNext}>Next</button>
+            <button className="navButton nextButton" onClick={handleNext}>
+              Next
+            </button>
+          </div>
         </div>
       )}
 

@@ -1,4 +1,4 @@
-import "./styles/splashpage.css";
+import "./index.css";
 
 function SplashPage({
   setCurrentPage,
@@ -7,12 +7,24 @@ function SplashPage({
   setSelectedChild,
 }) {
   return (
-    <div className="splashPage">
-      <h1> Mouth Sounds</h1>
-      <h2> What would you like to learn today?</h2>
-      <div className="splashPageContent">
-        <div className="childSelector">
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Mouth Sounds</h1>
+
+          <h2 className="page-subtitle">What would you like to learn today?</h2>
+        </header>
+
+        <div className="mb-8">
+          <label
+            htmlFor="child-select"
+            className="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Who is practicing?
+          </label>
+
           <select
+            id="child-select"
             value={selectedChild?.id || ""}
             onChange={(event) => {
               const child = children.find(
@@ -21,6 +33,7 @@ function SplashPage({
 
               setSelectedChild(child);
             }}
+            className="form-select"
           >
             <option value="">Select Child</option>
 
@@ -31,10 +44,12 @@ function SplashPage({
             ))}
           </select>
         </div>
-        <div className="activitySelector">
+
+        <div className="grid gap-5 sm:grid-cols-2">
           <button
             disabled={!selectedChild}
             onClick={() => setCurrentPage("lettersSplash")}
+            className="activity-button activity-button-primary"
           >
             Letter Sounds
           </button>
@@ -42,25 +57,45 @@ function SplashPage({
           <button
             disabled={!selectedChild}
             onClick={() => setCurrentPage("sightSplash")}
+            className="activity-button activity-button-secondary"
           >
             Sight Words
           </button>
         </div>
-        <div className="guardianActionSelector">
-          <button onClick={() => setCurrentPage("createChild")}>
-            Conceive a Child
-          </button>
 
-          <button onClick={() => setCurrentPage("createGuardian")}>
-            Create a Guardian
-          </button>
+        <div className="mt-10 border-t border-slate-200 pt-6">
+          <h3 className="section-title">Parent / Guardian</h3>
 
-          <button onClick={() => setCurrentPage("linkGuardianChild")}>
-            Link Guardian Child
-          </button>
-          <button onClick={() => setCurrentPage("childresults")}>
-            View Selected Child's Progress
-          </button>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <button
+              onClick={() => setCurrentPage("createChild")}
+              className="secondary-button"
+            >
+              Conceive a Child
+            </button>
+
+            <button
+              onClick={() => setCurrentPage("createGuardian")}
+              className="secondary-button"
+            >
+              Create a Guardian
+            </button>
+
+            <button
+              onClick={() => setCurrentPage("linkGuardianChild")}
+              className="secondary-button"
+            >
+              Link Guardian & Child
+            </button>
+
+            <button
+              disabled={!selectedChild}
+              onClick={() => setCurrentPage("childresults")}
+              className="secondary-button"
+            >
+              View Selected Child&apos;s Progress
+            </button>
+          </div>
         </div>
       </div>
     </div>

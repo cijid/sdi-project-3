@@ -1,75 +1,43 @@
-/* 1. Use a more-intuitive box-sizing model */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import "tailwindcss";
 
-/* 2. Remove default margin */
-*:not(dialog) {
-  margin: 0;
-}
-
-/* 3. Enable keyword animations */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    interpolate-size: allow-keywords;
+@layer components {
+  .page-container {
+    @apply min-h-screen bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-10;
   }
-}
 
-body {
-  /* 4. Increase line-height */
-  line-height: 1.5;
-  /* 5. Improve text rendering */
-  -webkit-font-smoothing: antialiased;
-}
+  .page-card {
+    @apply mx-auto w-full max-w-4xl rounded-3xl bg-white p-6 shadow-xl sm:p-10;
+  }
 
-/* 6. Improve media defaults */
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
+  .page-title {
+    @apply text-5xl font-bold tracking-tight text-sky-700;
+  }
 
-/* 7. Inherit fonts for form controls */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
+  .page-subtitle {
+    @apply mt-3 text-xl text-slate-600;
+  }
 
-/* 8. Avoid text overflows */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
+  .section-title {
+    @apply mb-4 text-center text-sm font-semibold uppercase tracking-wider text-slate-500;
+  }
 
-/* 9. Improve line wrapping */
-p {
-  text-wrap: pretty;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
+  .form-select {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-lg text-slate-700 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200;
+  }
 
-/*
-  10. Create a root stacking context
-*/
-#root,
-#__next {
-  isolation: isolate;
+  .activity-button {
+    @apply min-h-40 rounded-2xl px-6 py-8 text-2xl font-bold text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0;
+  }
+
+  .activity-button-primary {
+    @apply bg-gradient-to-br from-sky-500 to-cyan-400 hover:from-sky-600 hover:to-cyan-500;
+  }
+
+  .activity-button-secondary {
+    @apply bg-gradient-to-br from-violet-500 to-fuchsia-400 hover:from-violet-600 hover:to-fuchsia-500;
+  }
+
+  .secondary-button {
+    @apply rounded-xl bg-slate-100 px-4 py-3 font-medium text-slate-700 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-40;
+  }
 }
