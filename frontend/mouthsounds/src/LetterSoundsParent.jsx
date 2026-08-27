@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
-import "./App.css";
+import "./styles/gamestyleparent.css";
 
 function LetterSoundsParent({ setCurrentPage, selectedChild }) {
   const [letterList, setLetterList] = useState([]);
@@ -197,12 +197,18 @@ function LetterSoundsParent({ setCurrentPage, selectedChild }) {
       </div>
 
       {!gameOver && (
-        <div>
-          <button onClick={handlePrevious} disabled={currentIndex <= 0}>
+        <div className="gameNavigationRow">
+          <button
+            className="navButton prevButton"
+            onClick={handlePrevious}
+            disabled={currentIndex <= 0}
+          >
             Previous
           </button>
 
-          <button onClick={handleNext}>Next</button>
+          <button className="navButton nextButton" onClick={handleNext}>
+            Next
+          </button>
         </div>
       )}
 

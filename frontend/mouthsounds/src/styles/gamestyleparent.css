@@ -1,0 +1,62 @@
+/* 1. Main Container: Sets up the bounding box for absolute children */
+.letterSoundsGamePage {
+  position: relative; /* Anchors top-left and top-right children inside this container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Spans the full height of the viewport */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* 2. Top Navigation Wrapper (Optional wrapper to keep it clean) */
+.gameNavigationRow {
+  position: absolute;
+  top: 1.5rem; /* Sets uniform spacing from the top edge */
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: space-between; /* Automatically pushes them to opposite sides */
+  pointer-events: none; /* Prevents the invisible row from blocking center clicks */
+  width: calc(100% - 3rem); /* Accounts for left/right offsets */
+}
+
+/* 3. Navigation Buttons Styling */
+.navButton {
+  pointer-events: auto; /* Restores clickability on the buttons themselves */
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: #f0f0f0;
+}
+
+/* Alternative: Individual Absolute Placements (if not using .gameNavigationRow) */
+.prevButton {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.nextButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+/* 4. Game Content Area (Centered by Flexbox natively) */
+.gameContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 4rem; /* Pushes core content down so it never collides with top navigation */
+}

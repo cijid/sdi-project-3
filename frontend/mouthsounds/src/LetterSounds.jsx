@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
-import "./App.css";
+import "./styles/gamestyle.css";
 
 function LetterSounds({ setCurrentPage }) {
   const [letterList, setLetterList] = useState([]);
