@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./index.css";
 
 function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
   const [selectedGrade, setSelectedGrade] = useState("-1");
@@ -14,31 +15,60 @@ function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
   }
 
   return (
-    <div>
-      <h1>Sight Words</h1>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Sight Words</h1>
 
-      <label htmlFor="grade">Choose a grade level:</label>
+          <h2 className="page-subtitle">
+            Say the word that appears on screen.
+          </h2>
+        </header>
 
-      <select
-        id="grade"
-        value={selectedGrade}
-        onChange={(event) => setSelectedGrade(event.target.value)}
-      >
-        <option value="-1">Pre-K</option>
-        <option value="0">Kindergarten</option>
-        <option value="1">First Grade</option>
-        <option value="2">Second Grade</option>
-        <option value="3">Third Grade</option>
-        <option value="4">Nouns</option>
-      </select>
+        <label
+          htmlFor="grade"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
+          Choose a grade level:
+        </label>
 
-      <button onClick={() => handleChildMode}>Sight Words - Child Mode</button>
+        <select
+          id="grade"
+          value={selectedGrade}
+          onChange={(event) => setSelectedGrade(event.target.value)}
+          className="form-select"
+        >
+          <option value="-1">Pre-K</option>
+          <option value="0">Kindergarten</option>
+          <option value="1">First Grade</option>
+          <option value="2">Second Grade</option>
+          <option value="3">Third Grade</option>
+          <option value="4">Nouns</option>
+        </select>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <button
+            onClick={() => handleChildMode}
+            className="activity-button activity-button-primary"
+          >
+            Sight Words - Child Mode
+          </button>
 
-      <button onClick={handleParentMode}>
-        Sight Words - Parent Participation Mode
-      </button>
-
-      <button onClick={() => setCurrentPage("home")}>Back to Main Menu</button>
+          <button
+            onClick={handleParentMode}
+            className="activity-button activity-button-secondary"
+          >
+            Sight Words - Parent Participation Mode
+          </button>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-1">
+          <button
+            onClick={() => setCurrentPage("home")}
+            className="secondary-button"
+          >
+            Back to Main Menu
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
