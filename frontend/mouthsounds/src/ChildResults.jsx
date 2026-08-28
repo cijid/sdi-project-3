@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import "./index.css";
 
 function ChildResults({ selectedChild, setCurrentPage }) {
   const [children, setChildren] = useState([]);
@@ -44,59 +45,73 @@ function ChildResults({ selectedChild, setCurrentPage }) {
   }));
 
   return (
-    <div className="childrenresults">
-      <h1>Child Progress</h1>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Results</h1>
 
-      <label>
-        Child:
-        <select
-          value={childId}
-          onChange={(event) => setChildId(event.target.value)}
-        >
-          <option value="">Select Child</option>
+          <h2 className="page-subtitle">View a selected child's progress.</h2>
+        </header>
 
-          {children.map((child) => (
-            <option key={child.id} value={child.id}>
-              {child.first_name} {child.last_name}
-            </option>
-          ))}
-        </select>
-      </label>
+        <label className="mb-2 block text-sm font-semibold text-slate-700">
+          Child:
+          <select
+            value={childId}
+            onChange={(event) => setChildId(event.target.value)}
+            className="form-select"
+          >
+            <option value="">Select Child</option>
 
-      {results.length > 0 && (
-        <div style={{ width: "100%", height: 300 }}>
-          <ResponsiveContainer>
-            <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
+            {children.map((child) => (
+              <option key={child.id} value={child.id}>
+                {child.first_name} {child.last_name}
+              </option>
+            ))}
+          </select>
+        </label>
 
-              <XAxis dataKey="date" />
+        {results.length > 0 && (
+          <div style={{ width: "100%", height: 300 }}>
+            <ResponsiveContainer>
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
 
-              <YAxis />
+                <XAxis dataKey="date" />
 
-              <Tooltip />
+                <YAxis />
 
-              <Line
-                type="monotone"
-                dataKey="lettersounds"
-                stroke="#003cff"
-                name="Letter Sounds"
-                connectNulls
-              />
+                <Tooltip />
 
-              <Line
-                type="monotone"
-                dataKey="sightwords"
-                stroke="#b99e03"
-                name="Sight Words"
-                connectNulls
-              />
-              <Legend />
-            </LineChart>
-          </ResponsiveContainer>
+                <Line
+                  type="monotone"
+                  dataKey="lettersounds"
+                  stroke="#003cff"
+                  name="Letter Sounds"
+                  connectNulls
+                />
+
+                <Line
+                  type="monotone"
+                  dataKey="sightwords"
+                  stroke="#b99e03"
+                  name="Sight Words"
+                  connectNulls
+                />
+                <Legend />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+
+        <div className="grid gap-5 sm:grid-cols-1">
+          <button
+            onClick={() => setCurrentPage("home")}
+            className="secondary-button"
+          >
+            Back to Main Menu
+          </button>
         </div>
-      )}
-
-      <button onClick={() => setCurrentPage("home")}>Back to Main Menu</button>
+      </div>
     </div>
   );
 }

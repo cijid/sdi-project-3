@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
-import "./styles/gamestyle.css";
+import "./index.css";
 
 function LetterSounds({ setCurrentPage }) {
   const [letterList, setLetterList] = useState([]);
@@ -50,24 +50,37 @@ function LetterSounds({ setCurrentPage }) {
   }
 
   return (
-    <div className="letterGame-Container">
-      <div className="letterGame-Header">
-        <h1>Letter Sounds!</h1>
-      </div>
-      <div
-        className="randomLetter-Container"
-        onClick={handleLetterClick}
-        style={{ userSelect: "none", WebkitUserSelect: "none" }}
-      >
-        {gameOver ? "Time's Up!" : finalLetter?.letter}
-      </div>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Letter Sounds!</h1>
+        </header>
 
-      <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
-      {gameOver && (
-        <button onClick={() => setCurrentPage("home")}>
-          Back to Main Menu
-        </button>
-      )}
+        <div className="grid justify-items-center gap-5">
+          <div
+            className={`game-letter ${
+              gameOver ? "text-5xl whitespace-nowrap" : "text-8xl"
+            }`}
+            onClick={handleLetterClick}
+          >
+            {gameOver ? "Time's Up!" : finalLetter?.letter}
+          </div>
+
+          <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
+            <span>Timer:</span>
+            <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
+          </div>
+
+          {gameOver && (
+            <button
+              className="secondary-button"
+              onClick={() => setCurrentPage("home")}
+            >
+              Back to Main Menu
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

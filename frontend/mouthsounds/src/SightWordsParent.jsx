@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
-import "./styles/gamestyleparent.css";
 
 function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
   const [wordList, setWordList] = useState([]);
@@ -185,50 +184,59 @@ function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
   const currentWord = wordHistory[currentIndex];
 
   return (
-    <div className="letterGame-Container">
-      <div className="letterGame-Header">
-        <h1>Sight Words - Parent Mode</h1>
-      </div>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Sight Words! - Parent Mode</h1>
+        </header>
+        <div
+          className={`game-letter ${
+            gameOver ? "text-5xl whitespace-nowrap" : "text-8xl"
+          }`}
+        >
+          {gameOver ? "Time's Up!" : currentWord?.word}
+        </div>
 
-      <div
-        className="randomLetter-Container"
-        style={{
-          userSelect: "none",
-          WebkitUserSelect: "none",
-        }}
-      >
-        {gameOver ? "Time's Up!" : currentWord?.word}
-      </div>
+        {!gameOver && (
+          <div className="gameNavigationRow">
+            <div>
+              <button
+                className="navButton prevButton"
+                onClick={handlePrevious}
+                disabled={currentIndex <= 0}
+              >
+                Previous
+              </button>
 
-      {!gameOver && (
-        <div className="gameNavigationRow">
-          <div>
-            <button
-              className="navButton prevButton"
-              onClick={handlePrevious}
-              disabled={currentIndex <= 0}
-            >
-              Previous
-            </button>
+              <button className="navButton nextButton" onClick={handleNext}>
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+        <br />
+        <div className="grid justify-items-center gap-5">
+          <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
+            <span>Timer:</span>
+            <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
+          </div>
 
-            <button className="navButton nextButton" onClick={handleNext}>
-              Next
-            </button>
+          <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
+            <p>Score: {score}</p>
           </div>
         </div>
-      )}
 
-      <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
-
-      <div className="scoreboard">
-        <p>Score: {score}</p>
+        {gameOver && (
+          <div className="grid justify-items-center gap-5">
+            <button
+              className="secondary-button"
+              onClick={() => setCurrentPage("home")}
+            >
+              Back to Main Menu
+            </button>
+          </div>
+        )}
       </div>
-
-      {gameOver && (
-        <button onClick={() => setCurrentPage("home")}>
-          Back to Main Menu
-        </button>
-      )}
     </div>
   );
 }

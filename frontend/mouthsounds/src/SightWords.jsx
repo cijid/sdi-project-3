@@ -38,26 +38,36 @@ function SightWords({ setCurrentPage, gradeLevel }) {
   }
 
   return (
-    <div className="letterGame-Container">
-      <div className="letterGame-Header">
-        <h1>Sight Words!</h1>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Sight Words!</h1>
+        </header>
+        <div className="grid justify-items-center gap-5">
+          <div
+            className={`game-letter ${
+              gameOver ? "text-5xl whitespace-nowrap" : "text-8xl"
+            }`}
+            onClick={handleWordClick}
+          >
+            {gameOver ? "Time's Up!" : word?.word}
+          </div>
+
+          <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
+            <span>Timer:</span>
+            <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
+          </div>
+
+          {gameOver && (
+            <button
+              className="secondary-button"
+              onClick={() => setCurrentPage("home")}
+            >
+              Back to Main Menu
+            </button>
+          )}
+        </div>
       </div>
-
-      <div
-        className="randomLetter-Container"
-        onClick={handleWordClick}
-        style={{ userSelect: "none", WebkitUserSelect: "none" }}
-      >
-        {gameOver ? "Time's Up!" : word?.word}
-      </div>
-
-      <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
-
-      {gameOver && (
-        <button onClick={() => setCurrentPage("home")}>
-          Back to Main Menu
-        </button>
-      )}
     </div>
   );
 }

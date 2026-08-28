@@ -30,24 +30,24 @@ function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
           className="mb-2 block text-sm font-semibold text-slate-700"
         >
           Choose a grade level:
+          <select
+            id="grade"
+            value={selectedGrade}
+            onChange={(event) => setSelectedGrade(event.target.value)}
+            className="form-select"
+          >
+            <option value="-1">Pre-K</option>
+            <option value="0">Kindergarten</option>
+            <option value="1">First Grade</option>
+            <option value="2">Second Grade</option>
+            <option value="3">Third Grade</option>
+            <option value="4">Nouns</option>
+          </select>
         </label>
-
-        <select
-          id="grade"
-          value={selectedGrade}
-          onChange={(event) => setSelectedGrade(event.target.value)}
-          className="form-select"
-        >
-          <option value="-1">Pre-K</option>
-          <option value="0">Kindergarten</option>
-          <option value="1">First Grade</option>
-          <option value="2">Second Grade</option>
-          <option value="3">Third Grade</option>
-          <option value="4">Nouns</option>
-        </select>
+        <br />
         <div className="grid gap-5 sm:grid-cols-2">
           <button
-            onClick={() => handleChildMode}
+            onClick={handleChildMode}
             className="activity-button activity-button-primary"
           >
             Sight Words - Child Mode
@@ -60,6 +60,7 @@ function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
             Sight Words - Parent Participation Mode
           </button>
         </div>
+        <br />
         <div className="grid gap-5 sm:grid-cols-1">
           <button
             onClick={() => setCurrentPage("home")}

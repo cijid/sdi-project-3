@@ -34,44 +34,64 @@ function CreateGuardian({ setCurrentPage }) {
   }
 
   return (
-    <div className="guardiancreation-container">
-      <form onSubmit={handleGuardianSubmit}>
-        <label>
-          First Name:
-          <input
-            type="text"
-            value={firstname}
-            onChange={(event) => setFirstname(event.target.value)}
-          />
-        </label>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Create a Parent/Guardian</h1>
 
+          <h2 className="page-subtitle">
+            This is where you can add a new parent/guardian to the database.
+          </h2>
+        </header>
+
+        <form onSubmit={handleGuardianSubmit}>
+          <div className="grid gap-5 sm:grid-cols-3">
+            <label className="mb-2 block text-sm font-semibold text-slate-700">
+              First Name:
+              <input
+                type="text"
+                value={firstname}
+                onChange={(event) => setFirstname(event.target.value)}
+                className="form-select"
+              />
+            </label>
+
+            <label className="mb-2 block text-sm font-semibold text-slate-700">
+              Last Name:
+              <input
+                type="text"
+                value={lastname}
+                onChange={(event) => setLastname(event.target.value)}
+                className="form-select"
+              />
+            </label>
+
+            <label className="mb-2 block text-sm font-semibold text-slate-700">
+              Email:
+              <input
+                type="text"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                className="form-select"
+              />
+            </label>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-1">
+            <div className="activity-button-small activity-button-primary">
+              <button type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
         <br />
-
-        <label>
-          Last Name:
-          <input
-            type="text"
-            value={lastname}
-            onChange={(event) => setLastname(event.target.value)}
-          />
-        </label>
-
-        <br />
-
-        <label>
-          Email:
-          <input
-            type="text"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
-
-        <br />
-
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={() => setCurrentPage("home")}>Back to Main Menu</button>
+        <div className="grid gap-5 sm:grid-cols-1">
+          <button
+            onClick={() => setCurrentPage("home")}
+            className="secondary-button"
+          >
+            Back to Main Menu
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

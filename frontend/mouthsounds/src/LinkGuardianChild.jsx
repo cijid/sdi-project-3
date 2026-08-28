@@ -67,90 +67,112 @@ function LinkGuardianChild({ setCurrentPage }) {
   }, [childId]);
 
   return (
-    <div>
-      <h1>Associate Guardian with Child</h1>
+    <div className="page-container">
+      <div className="page-card">
+        <header className="mb-10 text-center">
+          <h1 className="page-title">Link Guardian & Child</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Child:
-          <select
-            value={childId}
-            onChange={(event) => setChildId(event.target.value)}
-          >
-            <option value="">Select Child</option>
+          <h2 className="page-subtitle">
+            View existing Guardian & Child associations. <br /> Create new
+            associations between Guardian & Child.
+          </h2>
+        </header>
 
-            {children.map((child) => (
-              <option key={child.id} value={child.id}>
-                {child.first_name} {child.last_name}
-              </option>
-            ))}
-          </select>
-        </label>
+        <form onSubmit={handleSubmit}>
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Child:
+            <select
+              value={childId}
+              onChange={(event) => setChildId(event.target.value)}
+              className="form-select"
+            >
+              <option value="">Select Child</option>
 
-        {childId && (
-          <div>
-            <h3>Assigned Guardians</h3>
+              {children.map((child) => (
+                <option key={child.id} value={child.id}>
+                  {child.first_name} {child.last_name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-            {assignedGuardians.length === 0 ? (
-              <p>No guardians assigned.</p>
-            ) : (
-              <ul>
-                {assignedGuardians.map((guardian) => (
-                  <li key={guardian.id}>
-                    {guardian.first_name} {guardian.last_name}
-                    {" - "}
-                    {guardian.relationship}
-                  </li>
-                ))}
-              </ul>
-            )}
+          {childId && (
+            <div>
+              <h2 className="page-subtitle">Assigned Guardians</h2>
+
+              {assignedGuardians.length === 0 ? (
+                <p className="mb-10 text-center">No guardians assigned.</p>
+              ) : (
+                <ul>
+                  {assignedGuardians.map((guardian) => (
+                    <li key={guardian.id} className="page-subtitle">
+                      {guardian.first_name} {guardian.last_name}
+                      {" - "}
+                      {guardian.relationship}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+          <br />
+
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Guardian:
+            <select
+              value={guardianId}
+              onChange={(event) => setGuardianId(event.target.value)}
+              className="form-select"
+            >
+              <option value="">Select Guardian</option>
+
+              {guardians.map((guardian) => (
+                <option key={guardian.id} value={guardian.id}>
+                  {guardian.first_name} {guardian.last_name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <br />
+
+          <label className="mb-2 block text-sm font-semibold text-slate-700">
+            Relationship:
+            <select
+              value={relationship}
+              onChange={(event) => setRelationship(event.target.value)}
+              className="form-select"
+            >
+              <option value="">Select Relationship</option>
+              <option value="Parent">Parent</option>
+              <option value="Guardian">Guardian</option>
+              <option value="Grandparent">Grandparent</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <br />
+          <div className="grid gap-5 sm:grid-cols-1">
+            <div className="activity-button-small activity-button-primary">
+              <button
+                type="submit"
+                disabled={!childId || !guardianId || !relationship}
+              >
+                Link Guardian to Child
+              </button>
+            </div>
           </div>
-        )}
+        </form>
         <br />
-
-        <label>
-          Guardian:
-          <select
-            value={guardianId}
-            onChange={(event) => setGuardianId(event.target.value)}
+        <div className="grid gap-5 sm:grid-cols-1">
+          <button
+            onClick={() => setCurrentPage("home")}
+            className="secondary-button"
           >
-            <option value="">Select Guardian</option>
-
-            {guardians.map((guardian) => (
-              <option key={guardian.id} value={guardian.id}>
-                {guardian.first_name} {guardian.last_name}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <br />
-
-        <label>
-          Relationship:
-          <select
-            value={relationship}
-            onChange={(event) => setRelationship(event.target.value)}
-          >
-            <option value="">Select Relationship</option>
-            <option value="Parent">Parent</option>
-            <option value="Guardian">Guardian</option>
-            <option value="Grandparent">Grandparent</option>
-            <option value="Other">Other</option>
-          </select>
-        </label>
-
-        <br />
-
-        <button
-          type="submit"
-          disabled={!childId || !guardianId || !relationship}
-        >
-          Link Guardian to Child
-        </button>
-      </form>
-
-      <button onClick={() => setCurrentPage("home")}>Back to Main Menu</button>
+            Back to Main Menu
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

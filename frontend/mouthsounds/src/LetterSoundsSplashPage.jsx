@@ -25,6 +25,7 @@ function LetterSoundsSplashPage({ setCurrentPage }) {
             Letter Sounds <br /> Parent Participation Mode
           </button>
         </div>
+        <br />
         <div className="grid gap-5 sm:grid-cols-1">
           <button
             onClick={() => setCurrentPage("home")}
