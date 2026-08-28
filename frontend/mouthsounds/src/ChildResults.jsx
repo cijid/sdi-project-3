@@ -9,9 +9,11 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-function ChildResults({ selectedChild, setCurrentPage }) {
+function ChildResults({ selectedChild }) {
+  const navigate = useNavigate();
   const [children, setChildren] = useState([]);
   const [childId, setChildId] = useState(selectedChild?.id || "");
   const [results, setResults] = useState([]);
@@ -104,10 +106,7 @@ function ChildResults({ selectedChild, setCurrentPage }) {
         )}
 
         <div className="grid gap-5 sm:grid-cols-1">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className="secondary-button"
-          >
+          <button onClick={() => navigate("/")} className="secondary-button">
             Back to Main Menu
           </button>
         </div>

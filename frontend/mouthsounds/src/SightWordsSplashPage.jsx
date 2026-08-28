@@ -1,17 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
+function SightWordsSplashPage({ setSightWordGrade }) {
+  const navigate = useNavigate();
   const [selectedGrade, setSelectedGrade] = useState("-1");
 
   function handleChildMode() {
     setSightWordGrade(Number(selectedGrade));
-    setCurrentPage("sightwords");
+    navigate("/sightwords/play");
   }
 
   function handleParentMode() {
     setSightWordGrade(Number(selectedGrade));
-    setCurrentPage("sightwordsparent");
+    navigate("/sightwords/parent");
   }
 
   return (
@@ -62,10 +64,7 @@ function SightWordsSplashPage({ setCurrentPage, setSightWordGrade }) {
         </div>
         <br />
         <div className="grid gap-5 sm:grid-cols-1">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className="secondary-button"
-          >
+          <button onClick={() => navigate("/")} className="secondary-button">
             Back to Main Menu
           </button>
         </div>

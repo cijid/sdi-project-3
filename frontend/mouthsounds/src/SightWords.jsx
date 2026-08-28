@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
 
 function SightWords({ setCurrentPage, gradeLevel }) {
+  const navigate = useNavigate();
   const [wordList, setWordList] = useState([]);
   const [word, setWord] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
@@ -59,10 +61,7 @@ function SightWords({ setCurrentPage, gradeLevel }) {
           </div>
 
           {gameOver && (
-            <button
-              className="secondary-button"
-              onClick={() => setCurrentPage("home")}
-            >
+            <button className="secondary-button" onClick={() => navigate("/")}>
               Back to Main Menu
             </button>
           )}

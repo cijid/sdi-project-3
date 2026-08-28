@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LinkGuardianChild({ setCurrentPage }) {
+function LinkGuardianChild() {
+  const navigate = useNavigate();
   const [children, setChildren] = useState([]);
   const [guardians, setGuardians] = useState([]);
   const [childId, setChildId] = useState("");
@@ -165,10 +167,7 @@ function LinkGuardianChild({ setCurrentPage }) {
         </form>
         <br />
         <div className="grid gap-5 sm:grid-cols-1">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className="secondary-button"
-          >
+          <button onClick={() => navigate("/")} className="secondary-button">
             Back to Main Menu
           </button>
         </div>

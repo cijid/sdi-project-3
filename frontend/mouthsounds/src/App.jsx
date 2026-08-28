@@ -1,4 +1,6 @@
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import SplashPage from "./SplashPage";
 import SightWords from "./SightWords";
 import LetterSounds from "./LetterSounds";
@@ -15,7 +17,6 @@ import "./App.css";
 
 function App() {
   const [selectedChild, setSelectedChild] = useState(null);
-  const [currentPage, setCurrentPage] = useState("home");
   const [sightWordGrade, setSightWordGrade] = useState(-1);
   const [children, setChildren] = useState([]);
 
@@ -28,76 +29,58 @@ function App() {
       });
   }, []);
 
-  if (currentPage === "createChild") {
-    return <ConceiveChild setCurrentPage={setCurrentPage} />;
-  }
-
-  if (currentPage === "createGuardian") {
-    return <CreateGuardian setCurrentPage={setCurrentPage} />;
-  }
-
-  if (currentPage === "linkGuardianChild") {
-    return <LinkGuardianChild setCurrentPage={setCurrentPage} />;
-  }
-
-  if (currentPage === "lettersSplash") {
-    return <LetterSoundsSplashPage setCurrentPage={setCurrentPage} />;
-  }
-
-  if (currentPage === "letters") {
-    return <LetterSounds setCurrentPage={setCurrentPage} />;
-  }
-
-  if (currentPage === "lettersparent") {
-    return (
-      <LetterSoundsParent
-        selectedChild={selectedChild}
-        setCurrentPage={setCurrentPage}
-      />
-    );
-  }
-
-  if (currentPage === "sightSplash") {
-    return (
-      <SightWordsSplashPage
-        setCurrentPage={setCurrentPage}
-        setSightWordGrade={setSightWordGrade}
-      />
-    );
-  }
-
-  if (currentPage === "childresults") {
-    return (
-      <ChildResults
-        selectedChild={selectedChild}
-        setCurrentPage={setCurrentPage}
-      />
-    );
-  }
-
-  if (currentPage === "sightwords") {
-    return (
-      <SightWords setCurrentPage={setCurrentPage} gradeLevel={sightWordGrade} />
-    );
-  }
-
-  if (currentPage === "sightwordsparent") {
-    return (
-      <SightWordsParent
-        setCurrentPage={setCurrentPage}
-        gradeLevel={sightWordGrade}
-        selectedChild={selectedChild}
-      />
-    );
-  }
-
   return (
-    <SplashPage
-      setCurrentPage={setCurrentPage}
-      children={children}
-      selectedChild={selectedChild}
-      setSelectedChild={setSelectedChild}
-    />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <SplashPage
+            children={children}
+            selectedChild={selectedChild}
+            setSelectedChild={setSelectedChild}
+          />
+        }
+      />
+      <Route path="/children/create" element={<ConceiveChild />} />
+
+      <Route path="/guardians/create" element={<CreateGuardian />} />
+
+      <Route path="/guardians/link" element={<LinkGuardianChild />} />
+
+      <Route
+        path="/results"
+        element={<ChildResults selectedChild={selectedChild} />}
+      />
+
+      <Route path="/letters" element={<LetterSoundsSplashPage />} />
+
+      <Route path="/letters/play" element={<LetterSounds />} />
+
+      <Route
+        path="/letters/parent"
+        element={<LetterSoundsParent selectedChild={selectedChild} />}
+      />
+
+      <Route
+        path="/sightwords"
+        element={<SightWordsSplashPage setSightWordGrade={setSightWordGrade} />}
+      />
+
+      <Route
+        path="/sightwords/play"
+        element={<SightWords gradeLevel={sightWordGrade} />}
+      />
+
+      <Route
+        path="/sightwords/parent"
+        element={
+          <SightWordsParent
+            gradeLevel={sightWordGrade}
+            selectedChild={selectedChild}
+          />
+        }
+      />
+    </Routes>
   );
 }
 

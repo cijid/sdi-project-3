@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-function ConceiveChild({ setCurrentPage }) {
+function ConceiveChild() {
+  const navigate = useNavigate();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dateofbirth, setDateofbirth] = useState("");
@@ -85,10 +87,7 @@ function ConceiveChild({ setCurrentPage }) {
         </form>
         <br />
         <div className="grid gap-5 sm:grid-cols-1">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className="secondary-button"
-          >
+          <button onClick={() => navigate("/")} className="secondary-button">
             Back to Main Menu
           </button>
         </div>

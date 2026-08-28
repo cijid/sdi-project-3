@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
 import "./styles/gamestyleparent.css";
 
-function LetterSoundsParent({ setCurrentPage, selectedChild }) {
+function LetterSoundsParent({ selectedChild }) {
+  const navigate = useNavigate();
   const [letterList, setLetterList] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -224,10 +226,7 @@ function LetterSoundsParent({ setCurrentPage, selectedChild }) {
 
         {gameOver && (
           <div className="grid justify-items-center gap-5">
-            <button
-              className="secondary-button"
-              onClick={() => setCurrentPage("home")}
-            >
+            <button className="secondary-button" onClick={() => navigate("/")}>
               Back to Main Menu
             </button>
           </div>

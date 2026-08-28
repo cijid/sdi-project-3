@@ -1,11 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-function SplashPage({
-  setCurrentPage,
-  children,
-  selectedChild,
-  setSelectedChild,
-}) {
+function SplashPage({ children, selectedChild, setSelectedChild }) {
+  const navigate = useNavigate();
   return (
     <div className="page-container">
       <div className="page-card">
@@ -48,7 +45,7 @@ function SplashPage({
         <div className="grid gap-5 sm:grid-cols-2">
           <button
             disabled={!selectedChild}
-            onClick={() => setCurrentPage("lettersSplash")}
+            onClick={() => navigate("/letters")}
             className="activity-button activity-button-primary"
           >
             Letter Sounds
@@ -56,7 +53,7 @@ function SplashPage({
 
           <button
             disabled={!selectedChild}
-            onClick={() => setCurrentPage("sightSplash")}
+            onClick={() => navigate("/sightwords")}
             className="activity-button activity-button-secondary"
           >
             Sight Words
@@ -68,21 +65,21 @@ function SplashPage({
 
           <div className="grid gap-3 sm:grid-cols-2">
             <button
-              onClick={() => setCurrentPage("createChild")}
+              onClick={() => navigate("/children/create")}
               className="secondary-button"
             >
               Conceive a Child
             </button>
 
             <button
-              onClick={() => setCurrentPage("createGuardian")}
+              onClick={() => navigate("/guardians/create")}
               className="secondary-button"
             >
               Create a Guardian
             </button>
 
             <button
-              onClick={() => setCurrentPage("linkGuardianChild")}
+              onClick={() => navigate("/guardians/link")}
               className="secondary-button"
             >
               Link Guardian & Child
@@ -90,7 +87,7 @@ function SplashPage({
 
             <button
               disabled={!selectedChild}
-              onClick={() => setCurrentPage("childresults")}
+              onClick={() => navigate("/results")}
               className="secondary-button"
             >
               View Selected Child&apos;s Progress

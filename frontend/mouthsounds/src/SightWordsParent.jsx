@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
 
-function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
+function SightWordsParent({ selectedChild, gradeLevel }) {
+  const navigate = useNavigate();
   const [wordList, setWordList] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -228,10 +230,7 @@ function SightWordsParent({ setCurrentPage, selectedChild, gradeLevel }) {
 
         {gameOver && (
           <div className="grid justify-items-center gap-5">
-            <button
-              className="secondary-button"
-              onClick={() => setCurrentPage("home")}
-            >
+            <button className="secondary-button" onClick={() => navigate("/")}>
               Back to Main Menu
             </button>
           </div>

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
 import "./index.css";
 
 function LetterSounds({ setCurrentPage }) {
+  const navigate = useNavigate();
   const [letterList, setLetterList] = useState([]);
   const [finalLetter, setFinalLetter] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
@@ -72,10 +74,7 @@ function LetterSounds({ setCurrentPage }) {
           </div>
 
           {gameOver && (
-            <button
-              className="secondary-button"
-              onClick={() => setCurrentPage("home")}
-            >
+            <button className="secondary-button" onClick={() => navigate("/")}>
               Back to Main Menu
             </button>
           )}

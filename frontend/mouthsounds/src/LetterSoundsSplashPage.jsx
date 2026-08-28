@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-function LetterSoundsSplashPage({ setCurrentPage }) {
+function LetterSoundsSplashPage() {
+  const navigate = useNavigate();
   return (
     <div className="page-container">
       <div className="page-card">
@@ -12,14 +14,14 @@ function LetterSoundsSplashPage({ setCurrentPage }) {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <button
-            onClick={() => setCurrentPage("letters")}
+            onClick={() => navigate("/letters/play")}
             className="activity-button activity-button-primary"
           >
             Letter Sounds <br /> Child Mode
           </button>
 
           <button
-            onClick={() => setCurrentPage("lettersparent")}
+            onClick={() => navigate("/letters/parent")}
             className="activity-button activity-button-secondary"
           >
             Letter Sounds <br /> Parent Participation Mode
@@ -27,10 +29,7 @@ function LetterSoundsSplashPage({ setCurrentPage }) {
         </div>
         <br />
         <div className="grid gap-5 sm:grid-cols-1">
-          <button
-            onClick={() => setCurrentPage("home")}
-            className="secondary-button"
-          >
+          <button onClick={() => navigate("/")} className="secondary-button">
             Back to Main Menu
           </button>
         </div>
