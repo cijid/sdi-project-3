@@ -191,6 +191,21 @@ function SightWordsParent({ selectedChild, gradeLevel }) {
         <header className="mb-10 text-center">
           <h1 className="page-title">Sight Words! - Parent Mode</h1>
         </header>
+        {!gameOver && (
+          <div className="mt-6 flex w-full items-center justify-between">
+            <button
+              className="parent-mode-button"
+              onClick={handlePrevious}
+              disabled={currentIndex <= 0}
+            >
+              Previous
+            </button>
+
+            <button className="parent-mode-button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
         <div
           className={`game-letter ${
             gameOver ? "text-5xl whitespace-nowrap" : "text-8xl"
@@ -199,23 +214,6 @@ function SightWordsParent({ selectedChild, gradeLevel }) {
           {gameOver ? "Time's Up!" : currentWord?.word}
         </div>
 
-        {!gameOver && (
-          <div className="gameNavigationRow">
-            <div>
-              <button
-                className="navButton prevButton"
-                onClick={handlePrevious}
-                disabled={currentIndex <= 0}
-              >
-                Previous
-              </button>
-
-              <button className="navButton nextButton" onClick={handleNext}>
-                Next
-              </button>
-            </div>
-          </div>
-        )}
         <br />
         <div className="grid justify-items-center gap-5">
           <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
-import "./styles/gamestyleparent.css";
 
 function LetterSoundsParent({ selectedChild }) {
   const navigate = useNavigate();
@@ -133,12 +132,6 @@ function LetterSoundsParent({ selectedChild }) {
       setGameStarted(true);
     }
 
-    const activeSessionId = await ensureSession();
-
-    if (!activeSessionId) {
-      return;
-    }
-
     // Move forward through existing history
     if (currentIndex < letterHistory.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -146,10 +139,16 @@ function LetterSoundsParent({ selectedChild }) {
       return;
     }
 
-    if (currentLetter) {
-      await saveAttempt(currentLetter, activeSessionId);
+    const activeSessionId = await ensureSession();
+
+    if (activeSessionId && currentLetter) {
+      try {
+        await saveAttempt(currentLetter, activeSessionId);
+      } catch (err) {
+        console.error("Failed to save attempt:", err);
+      }
     }
-    // Generate new letter
+
     const newLetter = randomLetter();
 
     if (newLetter) {
@@ -159,24 +158,14 @@ function LetterSoundsParent({ selectedChild }) {
     }
   }
 
-  async function handlePrevious() {
+  function handlePrevious() {
     if (gameOver) {
-      return;
-    }
-
-    if (!gameStarted) {
-      setGameStarted(true);
-    }
-
-    const activeSessionId = await ensureSession();
-
-    if (!activeSessionId) {
       return;
     }
 
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
-      setScore((prevScore) => prevScore - 1);
+      setScore((prevScore) => Math.max(prevScore - 1, 0));
     }
   }
 
@@ -188,7 +177,21 @@ function LetterSoundsParent({ selectedChild }) {
         <header className="mb-10 text-center">
           <h1 className="page-title">Letter Sounds! - Parent Mode</h1>
         </header>
+        {!gameOver && (
+          <div className="mt-6 flex w-full items-center justify-between">
+            <button
+              className="parent-mode-button"
+              onClick={handlePrevious}
+              disabled={currentIndex <= 0}
+            >
+              Previous
+            </button>
 
+            <button className="parent-mode-button" onClick={handleNext}>
+              Next
+            </button>
+          </div>
+        )}
         <div
           className={`game-letter ${
             gameOver ? "text-5xl whitespace-nowrap" : "text-8xl"
@@ -197,35 +200,20 @@ function LetterSoundsParent({ selectedChild }) {
           {gameOver ? "Time's Up!" : currentLetter?.letter}
         </div>
 
-        {!gameOver && (
-          <div className="gameNavigationRow">
-            <button
-              className="navButton prevButton"
-              onClick={handlePrevious}
-              disabled={currentIndex <= 0}
-            >
-              Previous
-            </button>
-
-            <button className="navButton nextButton" onClick={handleNext}>
-              Next
-            </button>
-          </div>
-        )}
-        <br />
-        <div className="grid justify-items-center gap-5">
+        <div className="mt-6 grid justify-items-center gap-3">
           <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
             <span>Timer:</span>
+
             <Timer when={gameStarted && !gameOver} setGameOver={setGameOver} />
           </div>
 
-          <div className="flex items-center gap-2 text-lg font-semibold text-slate-700">
-            <p>Score: {score}</p>
+          <div className="text-lg font-semibold text-slate-700">
+            Score: {score}
           </div>
         </div>
 
         {gameOver && (
-          <div className="grid justify-items-center gap-5">
+          <div className="mt-6 grid justify-items-center">
             <button className="secondary-button" onClick={() => navigate("/")}>
               Back to Main Menu
             </button>
